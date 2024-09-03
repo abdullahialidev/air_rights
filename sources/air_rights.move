@@ -1,10 +1,11 @@
 // ADJUSTMENTS MADE TO CONTRACT
 // AirRightsRegistry object holds parcel data
-// AirRightsRegistry is a named object and cannot be deleted
 // AirRightsRegistry object is created in the init function and owned by contract creator
+// AirRightsRegistry is a named object and cannot be deleted
 // AirRightsRegistry object accesible through object address so users can add a parcel or sell ext.
 // Parcel is created when added to the registry
 // Updated related functions and tests
+// test_for_init function
 
 
 
@@ -82,7 +83,7 @@ module SkyTrade::air_rights {
 
     //FUNCTIONS
     // Initialize the contract with the caller account
-    public fun init(account: &signer) {
+    fun init(account: &signer) {
 
        create_object_to_hold_air_rights_registry(account);
 
@@ -293,6 +294,16 @@ module SkyTrade::air_rights {
 
 
     // TEST HELPER FUNCTIONS
+    #[test_only]
+    public fun test_for_init(test_account: &signer) {
+        
+        init(test_account);
+
+
+    }
+
+
+
     // Public function to get a parcel by its index
     #[test_only]
     public fun get_parcel_index_for_test(registry_address: address, parcel_id: u64): u64 acquires AirRightsRegistry {
