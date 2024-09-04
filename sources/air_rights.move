@@ -75,6 +75,12 @@ module SkyTrade::air_rights {
         parcel_id: u64,
     }
 
+    #[event]
+    struct RegistryCreatedEvent has drop, store {
+        registry_address: address,
+    }
+
+
 
 
     
@@ -106,13 +112,21 @@ module SkyTrade::air_rights {
         };
 
         let object_signer = object::generate_signer(&constructor_ref);
-        move_to(&object_signer, air_rights_registry);     
+        move_to(&object_signer, air_rights_registry);  
+
+
+        // Emit the registry creation event with the object address
+        let registry_address = object::create_object_address(&caller_address, AIRRIGHTSREGISTRY);
+        let event = RegistryCreatedEvent {
+            registry_address,
+        };
+        event::emit(event);   
 
 
     }
 
 
-     #[view]
+    #[view]
     fun has_object(creator: address): bool {
         let object_address = object::create_object_address(&creator, AIRRIGHTSREGISTRY);
         object_exists<0x1::object::ObjectCore>(object_address)
