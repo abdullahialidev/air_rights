@@ -1,5 +1,5 @@
 import React from 'react';
-import {AptosWalletAdapterProvider} from "@aptos-labs/wallet-adapter-react";
+import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
 import { PetraWallet } from "petra-plugin-wallet-adapter";
 import { PontemWallet } from "@pontem/wallet-adapter-plugin";
 import ReactDOM from 'react-dom/client';
@@ -18,9 +18,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <AptosWalletAdapterProvider plugins={wallets} autoConnect={false}>
-    <App />
+      <App />
     </AptosWalletAdapterProvider>
-    </React.StrictMode>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
